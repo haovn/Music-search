@@ -1,0 +1,18 @@
+name = Music search
+description = Music search with Solr & Lucidworks
+dependencies[] = search
+dependencies[] = apachesolr
+package = Search Toolkit
+core = 7.x
+
+files[] = music_search.install
+files[] = music_search.module
+files[] = music_search.admin.inc
+files[] = music_search.pages.inc
+
+; Information added by drupal.org packaging script on 2011-06-14
+version = "7.x-1.0-dev"
+core = "7.x"
+project = "Music"
+datestamp = "1308019914"
+

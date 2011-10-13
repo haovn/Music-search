@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ *   Install and related hooks for music_search.
+ */
+
+/**
+ * Implements hook_enable().
+ */
+function music_search_enable() {
+  $active = variable_get('search_active_modules', array('node', 'user'));
+  $active[] = 'music_search';
+  variable_set('search_active_modules', array_unique($active));
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function music_search_uninstall() {
+  $stored = variable_get('apachesolr_index_last', array());
+  unset($stored['music_search']);
+  variable_set('apachesolr_index_last', $stored);
+
+  $active = variable_get('search_active_modules', array('node', 'user'));
+  $idx = array_search('music_search', $active);
+  if ($idx !== FALSE) {
+    unset($active[$idx]);
+    variable_set('search_active_modules', $active);
+  }
+  // Remove variables.
+  variable_del('music_search_browse');
+  variable_del('music_search_spellcheck');
+}
